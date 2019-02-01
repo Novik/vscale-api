@@ -1,7 +1,7 @@
 module Vscale
   module Backups
     def create_backup(scalet_id, params)
-      post("#{scalet_id}/backup", params)
+      post("scalets/#{scalet_id}/backup", params)
     end
 
     def create_from_backup(scalet_id, params)
