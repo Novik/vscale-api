@@ -42,6 +42,7 @@ module Vscale
         @http = Net::HTTP.start(uri.host, uri.port, use_ssl: true)
         @http.verify_mode = OpenSSL::SSL::VERIFY_PEER
         @http.ssl_version = :TLSv1_2
+        @endpoint_root = uri.path
       end
 
     private
@@ -60,7 +61,7 @@ module Vscale
       end
 
       def request(meth, path, params = {})
-        full_path = encode_path_params([API_ENDPOINT, path].join, params)
+        full_path = encode_path_params([@endpoint_root, path].join, params)
         
         request = VERB_MAP[meth.to_sym].new(full_path)
         
